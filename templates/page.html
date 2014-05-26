@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}{{ SITENAME }} - {{ page.title }}{% endblock %}
+{% block lang %}
+      {% if lang_siteurls %}
+      <div class="select-lang" >
+	{% for lang, siteurl in lang_siteurls.items() %}
+	{% if lang != DEFAULT_LANG %}
+	{% for translation in page.translations if translation.lang == lang %}
+	<a href="{{ SITEURL }}/{{ translation.url }}">{{ lang | upper }}</a>
+	{% else %}
+	{{ lang | upper }}
+	{% endfor %}
+	{% else %}
+	<strong>{{ lang | upper }}</strong>
+	{% endif %}
+	{% endfor %}
+      </div>
+      {% endif %}
+{% endblock %}
+      
+{% block content %}        
+  <section id="content" class="body">    
+    <!--h1 class="entry-title">{{ page.title }}</h1-->
+    {{ page.content }}
+  </section>
+{% endblock %}
+

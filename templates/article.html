@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}{{ article.title }}{% endblock %}
+{% block lang %}
+      {% if lang_siteurls %}
+      <div class="select-lang" >
+	{% for lang, siteurl in lang_siteurls.items() %}
+	{% if lang != DEFAULT_LANG %}
+	{% for translation in article.translations if translation.lang == lang %}
+	<a href="{{ SITEURL }}/{{ translation.url }}">{{ lang | upper }}</a>
+	{% else %}
+	{{ lang | upper }}
+	{% endfor %}
+	{% else %}
+	<strong>{{ lang | upper }}</strong>
+	{% endif %}
+	{% endfor %}
+      </div>
+      {% endif %}
+{% endblock %}
+{% block content %}        
+<section id="content" class="body">    
+<article>
+        <footer class="post-info">
+                <abbr class="published" title="{{ article.date.isoformat() }}">
+                    {{ article.date.strftime('%Y-%m-%d') }}
+                </abbr>
+        {% include 'taglist.html' %}
+        </footer><!-- /.post-info -->
+        <header> <h1 class="entry-title"><a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="{% trans title=article.title %}Permalien vers « {{ title }} »{% endtrans %}">{{ article.title }}</a></h1> </header>
+        <div class="entry-content">
+        {{ article.content }}
+        </div><!-- /.entry-content -->
+</article>
+</section>
+{% endblock %}

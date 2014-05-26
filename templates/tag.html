@@ -1,0 +1,12 @@
+{% extends "blog.html" %}
+{% block title %}{{ SITENAME }} - {{ tag }}{% endblock %}
+{% block lang %}
+<div class="select-lang" >
+  {% for lang, siteurl in lang_siteurls.items() %}
+  {% if lang != DEFAULT_LANG %}<a href="{{ siteurl }}/tag/{{ tag }}.html">{{ lang | upper }}</a>
+  {% else %}
+  <strong>{{ lang | upper }}</strong>
+  {% endif %} 
+  {% endfor %}
+</div>
+{% endblock %}

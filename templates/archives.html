@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block lang %}
+      {% if lang_siteurls %}
+      <div class="select-lang" >
+	{% for lang, siteurl in lang_siteurls.items() %}
+	{% if lang != DEFAULT_LANG %}<a href="{{ siteurl }}/archives.html">{{ lang | upper }}</a>
+	{% else %} 
+	<strong>{{ lang | upper }}</strong>
+	{% endif %} 
+	{% endfor %}
+      </div>
+      {% endif %}
+{% endblock %} -->
+{% block content %}
+<section id="content" class="body">
+<h1>{% trans %}Archives du blog{% endtrans %}</h1>
+
+<dl>
+{% for article in dates %}
+    <dt>{{ article.locale_date }}</dt>
+    <dd><a href='{{ SITEURL }}/{{ article.url }}'>{{ article.title }}</a></dd>
+{% endfor %}
+</dl>
+</section>
+{% endblock %}
